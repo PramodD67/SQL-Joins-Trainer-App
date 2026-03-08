@@ -12,7 +12,6 @@
 <style>
 
 :root{
-
 --bg:#f4f4f4;
 --text:#000;
 --card:#ffffff;
@@ -23,23 +22,18 @@
 --btn-green:#2E7D32;
 --btn-blue:#1565C0;
 --btn-orange:#C66900;
-
 }
 
 @media (prefers-color-scheme: dark){
-
 :root{
-
 --bg:#121212;
 --text:#ffffff;
 --card:#1e1e1e;
 --border:#444;
-
+}
 }
 
-}
-
-{
+*{
 box-sizing:border-box;
 }
 
@@ -70,11 +64,8 @@ margin-bottom:6px;
 }
 
 textarea{
-
 width:100%;
-min-height:120px;
-max-height:260px;
-
+height:160px;
 font-size:16px;
 padding:10px;
 margin-bottom:12px;
@@ -86,15 +77,10 @@ border:1px solid var(--border);
 border-radius:8px;
 
 overflow:auto;
-resize:none;
-
-appearance:none;
--webkit-appearance:none;
-
+resize:vertical;
 }
 
-select{
-
+select,input{
 width:100%;
 padding:12px;
 font-size:16px;
@@ -105,45 +91,9 @@ color:var(--text);
 
 border:1px solid var(--border);
 border-radius:8px;
-
-/ custom dropdown arrow */
-
-background-image:
-linear-gradient(45deg, transparent 50%, var(--text) 50%),
-linear-gradient(135deg, var(--text) 50%, transparent 50%);
-
-background-position:
-calc(100% - 20px) calc(50% - 3px),
-calc(100% - 14px) calc(50% - 3px);
-
-background-size:6px 6px, 6px 6px;
-background-repeat:no-repeat;
-
-appearance:none;
--webkit-appearance:none;
-
-}
-
-input{
-
-width:100%;
-padding:12px;
-font-size:16px;
-margin-bottom:12px;
-
-background:var(--card);
-color:var(--text);
-
-border:1px solid var(--border);
-border-radius:8px;
-
-appearance:none;
--webkit-appearance:none;
-
 }
 
 button{
-
 width:100%;
 padding:14px;
 font-size:16px;
@@ -153,7 +103,6 @@ border:none;
 border-radius:10px;
 
 color:white;
-
 }
 
 .generate{
@@ -178,29 +127,23 @@ flex:1;
 }
 
 table{
-
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
 
 background:var(--card);
-
 }
 
 td,th{
-
 border:1px solid var(--border);
 padding:10px;
 text-align:center;
-
 }
 
 .result{
-
 font-size:20px;
 font-weight:bold;
 margin-top:16px;
-
 }
 
 </style>
@@ -291,34 +234,20 @@ Reveal Answer
 let answer=[]
 
 function displayValue(v){
-
 return v===null ? "NULL" : v
-
-}
-
-function autoResizeTextarea(el){
-
-el.style.height="auto"
-el.style.height=el.scrollHeight+"px"
-
 }
 
 function generateValue(type,max,includeNull){
 
 if(includeNull && Math.random()<0.35){
-
 return null
-
 }
 
 if(type==="number"){
-
 return Math.floor(Math.random()*max)+1
-
 }
 
 return String.fromCharCode(65 + Math.floor(Math.random()*max))
-
 }
 
 function randomList(size,max,includeNull,type){
@@ -326,13 +255,10 @@ function randomList(size,max,includeNull,type){
 let arr=[]
 
 for(let i=0;i<size;i++){
-
 arr.push(generateValue(type,max,includeNull))
-
 }
 
 return arr
-
 }
 
 function generate(){
@@ -345,21 +271,17 @@ let max=3
 let includeNull=false
 
 if(diff==="medium"){
-
 sizeA=5
 sizeB=5
 max=4
 includeNull=true
-
 }
 
 if(diff==="hard"){
-
 sizeA=7
 sizeB=7
 max=5
 includeNull=true
-
 }
 
 let type=Math.random()<0.5 ? "number" : "alpha"
@@ -367,14 +289,11 @@ let type=Math.random()<0.5 ? "number" : "alpha"
 let A=randomList(sizeA,max,includeNull,type)
 let B=randomList(sizeB,max,includeNull,type)
 
-let ta=document.getElementById("tableA")
-let tb=document.getElementById("tableB")
+document.getElementById("tableA").value =
+A.map(displayValue).join("\n")
 
-ta.value=A.map(displayValue).join("\n")
-tb.value=B.map(displayValue).join("\n")
-
-autoResizeTextarea(ta)
-autoResizeTextarea(tb)
+document.getElementById("tableB").value =
+B.map(displayValue).join("\n")
 
 document.getElementById("rows").innerHTML=""
 document.getElementById("result").innerText=""
@@ -402,17 +321,11 @@ let rows=[]
 if(type==="inner"){
 
 A.forEach(a=>{
-
 B.forEach(b=>{
-
 if(a!==null && b!==null && a===b){
-
 rows.push([a,b])
-
 }
-
 })
-
 })
 
 }
@@ -424,20 +337,14 @@ A.forEach(a=>{
 let matched=false
 
 B.forEach(b=>{
-
 if(a!==null && b!==null && a===b){
-
 rows.push([a,b])
 matched=true
-
 }
-
 })
 
 if(!matched){
-
 rows.push([a,null])
-
 }
 
 })
@@ -451,20 +358,14 @@ B.forEach(b=>{
 let matched=false
 
 A.forEach(a=>{
-
 if(a!==null && b!==null && a===b){
-
 rows.push([a,b])
 matched=true
-
 }
-
 })
 
 if(!matched){
-
 rows.push([null,b])
-
 }
 
 })
@@ -482,31 +383,23 @@ let m=false
 B.forEach((b,i)=>{
 
 if(a!==null && b!==null && a===b){
-
 rows.push([a,b])
 matched[i]=true
 m=true
-
 }
 
 })
 
 if(!m){
-
 rows.push([a,null])
-
 }
 
 })
 
 B.forEach((b,i)=>{
-
 if(!matched[i]){
-
 rows.push([null,b])
-
 }
-
 })
 
 }
@@ -514,13 +407,9 @@ rows.push([null,b])
 if(type==="cartesian"){
 
 A.forEach(a=>{
-
 B.forEach(b=>{
-
 rows.push([a,b])
-
 })
-
 })
 
 }
@@ -528,7 +417,6 @@ rows.push([a,b])
 if(type==="union"){
 
 let set=[...new Set([...A,...B])]
-
 set.forEach(x=>rows.push([x,""]))
 
 }
@@ -555,13 +443,9 @@ answer=join(A,B,type)
 let guess=parseInt(document.getElementById("guess").value)
 
 if(guess===answer.length){
-
 document.getElementById("result").innerText="✅ Correct"
-
 }else{
-
 document.getElementById("result").innerText="❌ Incorrect"
-
 }
 
 }
