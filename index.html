@@ -14,7 +14,9 @@ margin:15px;
 background:#f4f4f4;
 }
 
-h1{font-size:22px;}
+h1{
+font-size:22px;
+}
 
 textarea{
 width:100%;
@@ -34,11 +36,34 @@ button{
 width:100%;
 padding:12px;
 font-size:16px;
-margin-top:6px;
+margin-top:8px;
 border:none;
-background:#007AFF;
-color:white;
 border-radius:8px;
+color:white;
+}
+
+.generate{
+background:#34C759;
+}
+
+.check{
+background:#007AFF;
+}
+
+.reveal{
+background:#FF9500;
+}
+
+.generate:active{
+background:#28a745;
+}
+
+.check:active{
+background:#005ccc;
+}
+
+.reveal:active{
+background:#cc7700;
 }
 
 table{
@@ -57,7 +82,7 @@ text-align:center;
 .result{
 font-size:18px;
 font-weight:bold;
-margin-top:10px;
+margin-top:12px;
 }
 
 </style>
@@ -97,20 +122,31 @@ margin-top:10px;
 <label>Your Guess (Row Count)</label>
 <input type="number" id="guess">
 
-<button onclick="generate()">Generate Question</button>
-<button onclick="check()">Check Answer</button>
-<button onclick="reveal()">Reveal Answer</button>
+<button class="generate" onclick="generate()">
+Generate Question
+</button>
+
+<button class="check" onclick="check()">
+Check Answer
+</button>
+
+<button class="reveal" onclick="reveal()">
+Reveal Answer
+</button>
 
 <div class="result" id="result"></div>
 
 <table>
+
 <thead>
 <tr>
 <th>A.id</th>
 <th>B.id</th>
 </tr>
 </thead>
+
 <tbody id="rows"></tbody>
+
 </table>
 
 <script>
@@ -360,8 +396,8 @@ tbody.appendChild(tr)
 
 })
 
-document.getElementById("result").innerText=
-"Correct Row Count = "+answer.length
+document.getElementById("result").innerText =
+"Correct Row Count = " + answer.length
 
 }
 
