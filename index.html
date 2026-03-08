@@ -39,7 +39,7 @@
 
 }
 
-*{
+{
 box-sizing:border-box;
 }
 
@@ -70,8 +70,11 @@ margin-bottom:6px;
 }
 
 textarea{
+
 width:100%;
 min-height:120px;
+max-height:260px;
+
 font-size:16px;
 padding:10px;
 margin-bottom:12px;
@@ -82,14 +85,47 @@ color:var(--text);
 border:1px solid var(--border);
 border-radius:8px;
 
+overflow:auto;
 resize:none;
-overflow:hidden;
 
 appearance:none;
 -webkit-appearance:none;
+
 }
 
-select,input{
+select{
+
+width:100%;
+padding:12px;
+font-size:16px;
+margin-bottom:12px;
+
+background:var(--card);
+color:var(--text);
+
+border:1px solid var(--border);
+border-radius:8px;
+
+/ custom dropdown arrow */
+
+background-image:
+linear-gradient(45deg, transparent 50%, var(--text) 50%),
+linear-gradient(135deg, var(--text) 50%, transparent 50%);
+
+background-position:
+calc(100% - 20px) calc(50% - 3px),
+calc(100% - 14px) calc(50% - 3px);
+
+background-size:6px 6px, 6px 6px;
+background-repeat:no-repeat;
+
+appearance:none;
+-webkit-appearance:none;
+
+}
+
+input{
+
 width:100%;
 padding:12px;
 font-size:16px;
@@ -103,9 +139,11 @@ border-radius:8px;
 
 appearance:none;
 -webkit-appearance:none;
+
 }
 
 button{
+
 width:100%;
 padding:14px;
 font-size:16px;
@@ -115,6 +153,7 @@ border:none;
 border-radius:10px;
 
 color:white;
+
 }
 
 .generate{
@@ -139,22 +178,29 @@ flex:1;
 }
 
 table{
+
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
+
 background:var(--card);
+
 }
 
 td,th{
+
 border:1px solid var(--border);
 padding:10px;
 text-align:center;
+
 }
 
 .result{
+
 font-size:20px;
 font-weight:bold;
 margin-top:16px;
+
 }
 
 </style>
@@ -382,7 +428,6 @@ B.forEach(b=>{
 if(a!==null && b!==null && a===b){
 
 rows.push([a,b])
-
 matched=true
 
 }
@@ -410,7 +455,6 @@ A.forEach(a=>{
 if(a!==null && b!==null && a===b){
 
 rows.push([a,b])
-
 matched=true
 
 }
@@ -440,9 +484,7 @@ B.forEach((b,i)=>{
 if(a!==null && b!==null && a===b){
 
 rows.push([a,b])
-
 matched[i]=true
-
 m=true
 
 }
