@@ -2,57 +2,76 @@
 <html>
 
 <head>
+
+<meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<meta name="theme-color" content="#1E3A8A">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <title>SQL Join Trainer</title>
 
 <style>
 
+{
+box-sizing:border-box;
+}
+
 body{
 font-family:-apple-system;
 margin:0;
-background:#1E3A8A;
+background:#121212;
 color:white;
 }
 
-h1{font-size:22px;
-   background:#1E3A8A;
-   color:white;
-   padding:14px;
-   padding-top(14px + env(safe-area-inset-top));
-  margin:0px;
+h1{
+font-size:22px;
+background:#1E3A8A;
+color:white;
+padding:16px;
+padding-top:calc(16px + env(safe-area-inset-top));
+text-align:center;
+margin:0;
 }
 
-.container{
-display:flex;
-gap:15px;
+.page{
+padding:16px;
 }
 
-.tablebox{
-flex:1;
+label{
+display:block;
+margin-bottom:6px;
 }
 
 textarea{
 width:100%;
 height:140px;
 font-size:16px;
-margin-bottom:10px;
 padding:10px;
+background:#1e1e1e;
+color:white;
+border:1px solid #444;
+margin-bottom:10px;
 }
 
 select,input{
 width:100%;
-padding:10px;
+padding:12px;
 font-size:16px;
-margin-bottom:10px;
+margin-bottom:12px;
+background:#1e1e1e;
+color:white;
+border:1px solid #444;
 }
 
 button{
 width:100%;
-padding:12px;
+padding:14px;
 font-size:16px;
 margin-top:8px;
 border:none;
-border-radius:8px;
+border-radius:10px;
 color:white;
 }
 
@@ -68,58 +87,55 @@ background:#1565C0;
 background:#C66900;
 }
 
-.generate:active{
-background:#1B5E20;
+.container{
+display:flex;
+gap:12px;
 }
 
-.check:active{
-background:#0D47A1;
-}
-
-.reveal:active{
-background:#8C4A00;
+.tablebox{
+flex:1;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:15px;
-background:white;
+margin-top:20px;
+background:#1e1e1e;
 }
 
 td,th{
-border:1px solid #ddd;
-padding:8px;
+border:1px solid #444;
+padding:10px;
 text-align:center;
 }
 
 .result{
-font-size:18px;
+font-size:20px;
 font-weight:bold;
-margin-top:12px;
+margin-top:16px;
 }
 
-/* DARK MODE */
+/ DARK MODE SUPPORT */
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light){
 
 body{
-background:#121212;
-color:#ffffff;
+background:#f4f4f4;
+color:#000;
 }
 
 textarea,select,input{
-background:#1e1e1e;
-color:white;
-border:1px solid #444;
+background:white;
+color:black;
+border:1px solid #ccc;
 }
 
 table{
-background:#1e1e1e;
+background:white;
 }
 
 td,th{
-border:1px solid #444;
+border:1px solid #ccc;
 }
 
 }
@@ -131,6 +147,8 @@ border:1px solid #444;
 <body>
 
 <h1>SQL Join Trainer</h1>
+
+<div class="page">
 
 <label>Difficulty</label>
 
@@ -165,6 +183,7 @@ Generate Question
 <label>Join Type</label>
 
 <select id="joinType">
+
 <option value="inner">Inner Join</option>
 <option value="left">Left Join</option>
 <option value="right">Right Join</option>
@@ -172,9 +191,11 @@ Generate Question
 <option value="cartesian">Cartesian Join</option>
 <option value="union">Union</option>
 <option value="unionall">Union All</option>
+
 </select>
 
 <label>Your Guess (Row Count)</label>
+
 <input type="number" id="guess">
 
 <button class="check" onclick="check()">
@@ -200,25 +221,34 @@ Reveal Answer
 
 </table>
 
+</div>
+
 <script>
 
 let answer=[]
 
 function displayValue(v){
+
 return v===null ? "NULL" : v
+
 }
 
 function generateValue(type,max,includeNull){
 
 if(includeNull && Math.random()<0.35){
+
 return null
+
 }
 
 if(type==="number"){
+
 return Math.floor(Math.random()*max)+1
+
 }
 
 return String.fromCharCode(65 + Math.floor(Math.random()*max))
+
 }
 
 function randomList(size,max,includeNull,type){
@@ -226,7 +256,9 @@ function randomList(size,max,includeNull,type){
 let arr=[]
 
 for(let i=0;i<size;i++){
+
 arr.push(generateValue(type,max,includeNull))
+
 }
 
 return arr
@@ -243,17 +275,21 @@ let max=3
 let includeNull=false
 
 if(diff==="medium"){
+
 sizeA=5
 sizeB=5
 max=4
 includeNull=true
+
 }
 
 if(diff==="hard"){
+
 sizeA=7
 sizeB=7
 max=5
 includeNull=true
+
 }
 
 let type=Math.random()<0.5 ? "number" : "alpha"
@@ -293,11 +329,17 @@ let rows=[]
 if(type==="inner"){
 
 A.forEach(a=>{
+
 B.forEach(b=>{
+
 if(a!==null && b!==null && a===b){
+
 rows.push([a,b])
+
 }
+
 })
+
 })
 
 }
@@ -311,14 +353,19 @@ let matched=false
 B.forEach(b=>{
 
 if(a!==null && b!==null && a===b){
+
 rows.push([a,b])
+
 matched=true
+
 }
 
 })
 
 if(!matched){
+
 rows.push([a,null])
+
 }
 
 })
@@ -334,14 +381,19 @@ let matched=false
 A.forEach(a=>{
 
 if(a!==null && b!==null && a===b){
+
 rows.push([a,b])
+
 matched=true
+
 }
 
 })
 
 if(!matched){
+
 rows.push([null,b])
+
 }
 
 })
@@ -359,15 +411,21 @@ let m=false
 B.forEach((b,i)=>{
 
 if(a!==null && b!==null && a===b){
+
 rows.push([a,b])
+
 matched[i]=true
+
 m=true
+
 }
 
 })
 
 if(!m){
+
 rows.push([a,null])
+
 }
 
 })
@@ -375,7 +433,9 @@ rows.push([a,null])
 B.forEach((b,i)=>{
 
 if(!matched[i]){
+
 rows.push([null,b])
+
 }
 
 })
@@ -385,9 +445,13 @@ rows.push([null,b])
 if(type==="cartesian"){
 
 A.forEach(a=>{
+
 B.forEach(b=>{
+
 rows.push([a,b])
+
 })
+
 })
 
 }
@@ -395,6 +459,7 @@ rows.push([a,b])
 if(type==="union"){
 
 let set=[...new Set([...A,...B])]
+
 set.forEach(x=>rows.push([x,""]))
 
 }
@@ -421,9 +486,13 @@ answer=join(A,B,type)
 let guess=parseInt(document.getElementById("guess").value)
 
 if(guess===answer.length){
+
 document.getElementById("result").innerText="✅ Correct"
+
 }else{
+
 document.getElementById("result").innerText="❌ Incorrect"
+
 }
 
 }
