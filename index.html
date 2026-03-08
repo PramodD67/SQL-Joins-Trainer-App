@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-
+<meta name="color-scheme" content="light dark">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <meta name="theme-color" content="#1E3A8A">
@@ -15,25 +15,47 @@
 <style>
 
 :root{
-color-scheme: light dark;
+
+--bg:#f4f4f4;
+--text:#000;
+--card:#ffffff;
+--border:#cccccc;
+
+--header:#1E3A8A;
+
+--btn-green:#2E7D32;
+--btn-blue:#1565C0;
+--btn-orange:#C66900;
+
 }
 
-{
+@media (prefers-color-scheme: dark){
+
+:root{
+
+--bg:#121212;
+--text:#ffffff;
+--card:#1e1e1e;
+--border:#444;
+
+}
+
+}
+
+*{
 box-sizing:border-box;
 }
-
-/ DEFAULT STYLES (use system colors) */
 
 body{
 font-family:-apple-system;
 margin:0;
-background:Canvas;
-color:CanvasText;
+background:var(--bg);
+color:var(--text);
 }
 
 h1{
 font-size:22px;
-background:#1E3A8A;
+background:var(--header);
 color:white;
 padding:16px;
 padding-top:calc(16px + env(safe-area-inset-top));
@@ -50,47 +72,50 @@ display:block;
 margin-bottom:6px;
 }
 
-textarea{
-width:100%;
-height:140px;
-font-size:16px;
-padding:10px;
-margin-bottom:10px;
-background:Field;
-color:FieldText;
-border:1px solid GrayText;
-}
+textarea,
+select,
+input{
 
-select,input{
 width:100%;
 padding:12px;
 font-size:16px;
 margin-bottom:12px;
-background:Field;
-color:FieldText;
-border:1px solid GrayText;
+
+background:var(--card);
+color:var(--text);
+
+border:1px solid var(--border);
+border-radius:8px;
+
+appearance:none;
+-webkit-appearance:none;
+
 }
 
 button{
+
 width:100%;
 padding:14px;
 font-size:16px;
 margin-top:8px;
+
 border:none;
 border-radius:10px;
+
 color:white;
+
 }
 
 .generate{
-background:#2E7D32;
+background:var(--btn-green);
 }
 
 .check{
-background:#1565C0;
+background:var(--btn-blue);
 }
 
 .reveal{
-background:#C66900;
+background:var(--btn-orange);
 }
 
 .container{
@@ -103,22 +128,29 @@ flex:1;
 }
 
 table{
+
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
-background:Field;
+
+background:var(--card);
+
 }
 
 td,th{
-border:1px solid GrayText;
+
+border:1px solid var(--border);
 padding:10px;
 text-align:center;
+
 }
 
 .result{
+
 font-size:20px;
 font-weight:bold;
 margin-top:16px;
+
 }
 
 </style>
