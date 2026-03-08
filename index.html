@@ -12,6 +12,7 @@ body{
 font-family:-apple-system;
 margin:15px;
 background:#f4f4f4;
+color:#000;
 }
 
 h1{
@@ -32,6 +33,7 @@ width:100%;
 height:140px;
 font-size:16px;
 margin-bottom:10px;
+padding:10px;
 }
 
 select,input{
@@ -52,15 +54,27 @@ color:white;
 }
 
 .generate{
-background:#007AFF;
+background:#2E7D32;
 }
 
 .check{
-background:#34C759;
+background:#1565C0;
 }
 
 .reveal{
-background:#FF9500;
+background:#C66900;
+}
+
+.generate:active{
+background:#1B5E20;
+}
+
+.check:active{
+background:#0D47A1;
+}
+
+.reveal:active{
+background:#8C4A00;
 }
 
 table{
@@ -80,6 +94,31 @@ text-align:center;
 font-size:18px;
 font-weight:bold;
 margin-top:12px;
+}
+
+/* DARK MODE */
+
+@media (prefers-color-scheme: dark) {
+
+body{
+background:#121212;
+color:#ffffff;
+}
+
+textarea,select,input{
+background:#1e1e1e;
+color:white;
+border:1px solid #444;
+}
+
+table{
+background:#1e1e1e;
+}
+
+td,th{
+border:1px solid #444;
+}
+
 }
 
 </style>
