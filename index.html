@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 
-<title>SQL Join Trainer</title>
+<title>Practice SQL Joins</title>
 
 <style>
 
@@ -271,16 +271,16 @@ let max=6
 let includeNull=false
 
 if(diff==="medium"){
-sizeA=6
-sizeB=6
+sizeA=5
+sizeB=5
 max=9
 includeNull=true
 }
 
 if(diff==="hard"){
-sizeA=9
-sizeB=9
-max=14
+sizeA=7
+sizeB=7
+max=12
 includeNull=true
 }
 
@@ -443,9 +443,9 @@ answer=join(A,B,type)
 let guess=parseInt(document.getElementById("guess").value)
 
 if(guess===answer.length){
-document.getElementById("result").innerText="â Correct"
+document.getElementById("result").innerText="✅ Correct"
 }else{
-document.getElementById("result").innerText="â Incorrect"
+document.getElementById("result").innerText="❌ Incorrect"
 }
 
 }
