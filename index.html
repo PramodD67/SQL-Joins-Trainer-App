@@ -33,7 +33,7 @@
 }
 }
 
-*{
+{
 box-sizing:border-box;
 }
 
@@ -65,7 +65,7 @@ margin-bottom:6px;
 
 textarea{
 width:100%;
-height:160px;
+height:170px;
 font-size:16px;
 padding:10px;
 margin-bottom:12px;
@@ -171,17 +171,13 @@ Generate Question
 <div class="container">
 
 <div class="tablebox">
-
 <h3>Table A</h3>
 <textarea id="tableA"></textarea>
-
 </div>
 
 <div class="tablebox">
-
 <h3>Table B</h3>
 <textarea id="tableB"></textarea>
-
 </div>
 
 </div>
@@ -189,7 +185,6 @@ Generate Question
 <label>Join Type</label>
 
 <select id="joinType">
-
 <option value="inner">Inner Join</option>
 <option value="left">Left Join</option>
 <option value="right">Right Join</option>
@@ -197,7 +192,6 @@ Generate Question
 <option value="cartesian">Cartesian Join</option>
 <option value="union">Union</option>
 <option value="unionall">Union All</option>
-
 </select>
 
 <label>Your Guess (Row Count)</label>
@@ -237,6 +231,10 @@ function displayValue(v){
 return v===null ? "NULL" : v
 }
 
+function randomBetween(min,max){
+return Math.floor(Math.random()(max-min+1))+min
+}
+
 function generateValue(type,max,includeNull){
 
 if(includeNull && Math.random()<0.35){
@@ -250,8 +248,15 @@ return Math.floor(Math.random()*max)+1
 return String.fromCharCode(65 + Math.floor(Math.random()*max))
 }
 
-function randomBetween(min,max){
-return Math.floor(Math.random()*(max-min+1))+min
+function randomList(size,max,includeNull,type){
+
+let arr=[]
+
+for(let i=0;i<size;i++){
+arr.push(generateValue(type,max,includeNull))
+}
+
+return arr
 }
 
 function generate(){
@@ -264,26 +269,20 @@ let max=5
 let includeNull=false
 
 if(diff==="easy"){
-
 sizeA=randomBetween(4,6)
 sizeB=randomBetween(4,6)
-
 }
 
 if(diff==="medium"){
-
 sizeA=randomBetween(6,9)
 sizeB=randomBetween(6,9)
 includeNull=true
-
 }
 
 if(diff==="hard"){
-
 sizeA=randomBetween(9,12)
 sizeB=randomBetween(9,12)
 includeNull=true
-
 }
 
 let type=Math.random()<0.5 ? "number" : "alpha"
@@ -301,8 +300,6 @@ document.getElementById("rows").innerHTML=""
 document.getElementById("result").innerText=""
 
 }
-
-
 
 function parse(x){
 
@@ -385,13 +382,11 @@ A.forEach(a=>{
 let m=false
 
 B.forEach((b,i)=>{
-
 if(a!==null && b!==null && a===b){
 rows.push([a,b])
 matched[i]=true
 m=true
 }
-
 })
 
 if(!m){
