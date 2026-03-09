@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 
 <title>SQL Join Trainer</title>
@@ -13,21 +14,27 @@
 :root{
 --bg:#f4f4f4;
 --text:#000;
---card:#fff;
---border:#ccc;
+--card:#ffffff;
+--border:#cccccc;
+
 --header:#1E3A8A;
---green:#2E7D32;
---blue:#1565C0;
---orange:#C66900;
+
+--btn-green:#2E7D32;
+--btn-blue:#1565C0;
+--btn-orange:#C66900;
 }
 
 @media (prefers-color-scheme: dark){
 :root{
 --bg:#121212;
---text:#fff;
+--text:#ffffff;
 --card:#1e1e1e;
 --border:#444;
 }
+}
+
+*{
+box-sizing:border-box;
 }
 
 body{
@@ -38,9 +45,11 @@ color:var(--text);
 }
 
 h1{
+font-size:22px;
 background:var(--header);
 color:white;
 padding:16px;
+padding-top:calc(16px + env(safe-area-inset-top));
 text-align:center;
 margin:0;
 }
@@ -51,43 +60,62 @@ padding:16px;
 
 label{
 display:block;
-margin-top:10px;
-margin-bottom:5px;
+margin-bottom:6px;
 }
 
 textarea{
 width:100%;
 height:160px;
+font-size:16px;
 padding:10px;
-border-radius:8px;
-border:1px solid var(--border);
+margin-bottom:12px;
+
 background:var(--card);
 color:var(--text);
+
+border:1px solid var(--border);
+border-radius:8px;
+
 overflow:auto;
+resize:vertical;
 }
 
 select,input{
 width:100%;
 padding:12px;
-border-radius:8px;
-border:1px solid var(--border);
+font-size:16px;
+margin-bottom:12px;
+
 background:var(--card);
 color:var(--text);
+
+border:1px solid var(--border);
+border-radius:8px;
 }
 
 button{
 width:100%;
 padding:14px;
-margin-top:10px;
+font-size:16px;
+margin-top:8px;
+
 border:none;
 border-radius:10px;
+
 color:white;
-font-size:16px;
 }
 
-.generate{background:var(--green);}
-.check{background:var(--blue);}
-.reveal{background:var(--orange);}
+.generate{
+background:var(--btn-green);
+}
+
+.check{
+background:var(--btn-blue);
+}
+
+.reveal{
+background:var(--btn-orange);
+}
 
 .container{
 display:flex;
@@ -102,22 +130,24 @@ table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
+
 background:var(--card);
 }
 
 td,th{
 border:1px solid var(--border);
-padding:8px;
+padding:10px;
 text-align:center;
 }
 
 .result{
-font-size:18px;
-margin-top:10px;
+font-size:20px;
 font-weight:bold;
+margin-top:16px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -134,18 +164,24 @@ font-weight:bold;
 <option value="hard">Hard</option>
 </select>
 
-<button class="generate" onclick="generate()">Generate Question</button>
+<button class="generate" onclick="generate()">
+Generate Question
+</button>
 
 <div class="container">
 
 <div class="tablebox">
+
 <h3>Table A</h3>
 <textarea id="tableA"></textarea>
+
 </div>
 
 <div class="tablebox">
+
 <h3>Table B</h3>
 <textarea id="tableB"></textarea>
+
 </div>
 
 </div>
@@ -153,6 +189,7 @@ font-weight:bold;
 <label>Join Type</label>
 
 <select id="joinType">
+
 <option value="inner">Inner Join</option>
 <option value="left">Left Join</option>
 <option value="right">Right Join</option>
@@ -160,24 +197,34 @@ font-weight:bold;
 <option value="cartesian">Cartesian Join</option>
 <option value="union">Union</option>
 <option value="unionall">Union All</option>
+
 </select>
 
 <label>Your Guess (Row Count)</label>
+
 <input type="number" id="guess">
 
-<button class="check" onclick="check()">Check Answer</button>
-<button class="reveal" onclick="reveal()">Reveal Answer</button>
+<button class="check" onclick="check()">
+Check Answer
+</button>
+
+<button class="reveal" onclick="reveal()">
+Reveal Answer
+</button>
 
 <div class="result" id="result"></div>
 
 <table>
+
 <thead>
 <tr>
 <th>A.id</th>
 <th>B.id</th>
 </tr>
 </thead>
+
 <tbody id="rows"></tbody>
+
 </table>
 
 </div>
@@ -187,11 +234,7 @@ font-weight:bold;
 let answer=[]
 
 function displayValue(v){
-return v===null?"NULL":v
-}
-
-function randomBetween(min,max){
-return Math.floor(Math.random()*(max-min+1))+min
+return v===null ? "NULL" : v
 }
 
 function generateValue(type,max,includeNull){
@@ -204,7 +247,7 @@ if(type==="number"){
 return Math.floor(Math.random()*max)+1
 }
 
-return String.fromCharCode(65 + Math.floor(Math.random()*max))
+return String.fromCharCode(65 + Math.floor(Math.random()max))
 }
 
 function randomList(size,max,includeNull,type){
@@ -218,52 +261,65 @@ arr.push(generateValue(type,max,includeNull))
 return arr
 }
 
+function randomBetween(min,max){
+return Math.floor(Math.random()(max-min+1))+min
+}
+
 function generate(){
 
 let diff=document.getElementById("difficulty").value
 
 let sizeA
 let sizeB
+let max
 let includeNull=false
-let max=5
 
 if(diff==="easy"){
 sizeA=randomBetween(4,6)
 sizeB=randomBetween(4,6)
+max=3
 }
 
 if(diff==="medium"){
 sizeA=randomBetween(6,9)
 sizeB=randomBetween(6,9)
+max=4
 includeNull=true
 }
 
 if(diff==="hard"){
 sizeA=randomBetween(9,12)
 sizeB=randomBetween(9,12)
+max=5
 includeNull=true
 }
 
-let type=Math.random()<0.5?"number":"alpha"
+let type=Math.random()<0.5 ? "number" : "alpha"
 
 let A=randomList(sizeA,max,includeNull,type)
 let B=randomList(sizeB,max,includeNull,type)
 
-document.getElementById("tableA").value=A.map(displayValue).join("\n")
-document.getElementById("tableB").value=B.map(displayValue).join("\n")
+document.getElementById("tableA").value =
+A.map(displayValue).join("\n")
+
+document.getElementById("tableB").value =
+B.map(displayValue).join("\n")
 
 document.getElementById("rows").innerHTML=""
 document.getElementById("result").innerText=""
 
-answer=[]
 }
 
 function parse(x){
 
 return x.split(/\n/).map(v=>{
+
 v=v.trim()
+
 if(v.toLowerCase()==="null") return null
+
 return v
+
 })
 
 }
@@ -273,6 +329,7 @@ function join(A,B,type){
 let rows=[]
 
 if(type==="inner"){
+
 A.forEach(a=>{
 B.forEach(b=>{
 if(a!==null && b!==null && a===b){
@@ -280,77 +337,115 @@ rows.push([a,b])
 }
 })
 })
+
 }
 
 if(type==="left"){
+
 A.forEach(a=>{
+
 let matched=false
+
 B.forEach(b=>{
 if(a!==null && b!==null && a===b){
 rows.push([a,b])
 matched=true
 }
 })
-if(!matched) rows.push([a,null])
+
+if(!matched){
+rows.push([a,null])
+}
+
 })
+
 }
 
 if(type==="right"){
+
 B.forEach(b=>{
+
 let matched=false
+
 A.forEach(a=>{
 if(a!==null && b!==null && a===b){
 rows.push([a,b])
 matched=true
 }
 })
-if(!matched) rows.push([null,b])
+
+if(!matched){
+rows.push([null,b])
+}
+
 })
+
 }
 
 if(type==="full"){
+
 let matched=new Array(B.length).fill(false)
 
 A.forEach(a=>{
+
 let m=false
+
 B.forEach((b,i)=>{
+
 if(a!==null && b!==null && a===b){
 rows.push([a,b])
 matched[i]=true
 m=true
 }
+
 })
-if(!m) rows.push([a,null])
+
+if(!m){
+rows.push([a,null])
+}
+
 })
 
 B.forEach((b,i)=>{
-if(!matched[i]) rows.push([null,b])
+if(!matched[i]){
+rows.push([null,b])
+}
 })
+
 }
 
 if(type==="cartesian"){
+
 A.forEach(a=>{
 B.forEach(b=>{
 rows.push([a,b])
 })
 })
+
 }
 
 if(type==="union"){
-[...new Set([...A,...B])].forEach(x=>rows.push([x,""]))
+
+let set=[...new Set([...A,...B])]
+set.forEach(x=>rows.push([x,""]))
+
 }
 
 if(type==="unionall"){
+
 [...A,...B].forEach(x=>rows.push([x,""]))
+
 }
 
 return rows
+
 }
 
 function check(){
 
 let A=parse(document.getElementById("tableA").value)
 let B=parse(document.getElementById("tableB").value)
+
 let type=document.getElementById("joinType").value
 
 answer=join(A,B,type)
@@ -368,18 +463,29 @@ document.getElementById("result").innerText="❌ Incorrect"
 function reveal(){
 
 let tbody=document.getElementById("rows")
+
 tbody.innerHTML=""
 
 answer.forEach(r=>{
+
 let tr=document.createElement("tr")
-tr.innerHTML="<td>"+displayValue(r[0])+"</td><td>"+displayValue(r[1])+"</td>"
+
+let a=displayValue(r[0])
+let b=displayValue(r[1])
+
+tr.innerHTML="<td>"+a+"</td><td>"+b+"</td>"
+
 tbody.appendChild(tr)
+
 })
 
-document.getElementById("result").innerText="Correct Row Count = "+answer.length
+document.getElementById("result").innerText =
+"Correct Row Count = " + answer.length
+
 }
 
 </script>
 
 </body>
+
 </html>
