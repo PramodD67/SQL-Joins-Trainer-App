@@ -250,38 +250,40 @@ return Math.floor(Math.random()*max)+1
 return String.fromCharCode(65 + Math.floor(Math.random()*max))
 }
 
-function randomList(size,max,includeNull,type){
-
-let arr=[]
-
-for(let i=0;i<size;i++){
-arr.push(generateValue(type,max,includeNull))
-}
-
-return arr
+function randomBetween(min,max){
+return Math.floor(Math.random()*(max-min+1))+min
 }
 
 function generate(){
 
 let diff=document.getElementById("difficulty").value
 
-let sizeA=3
-let sizeB=3
-let max=3
+let sizeA
+let sizeB
+let max=5
 let includeNull=false
 
+if(diff==="easy"){
+
+sizeA=randomBetween(4,6)
+sizeB=randomBetween(4,6)
+
+}
+
 if(diff==="medium"){
-sizeA=5
-sizeB=5
-max=4
+
+sizeA=randomBetween(6,9)
+sizeB=randomBetween(6,9)
 includeNull=true
+
 }
 
 if(diff==="hard"){
-sizeA=7
-sizeB=7
-max=5
+
+sizeA=randomBetween(9,12)
+sizeB=randomBetween(9,12)
 includeNull=true
+
 }
 
 let type=Math.random()<0.5 ? "number" : "alpha"
@@ -299,6 +301,8 @@ document.getElementById("rows").innerHTML=""
 document.getElementById("result").innerText=""
 
 }
+
+
 
 function parse(x){
 
