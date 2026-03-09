@@ -31,9 +31,7 @@
 }
 }
 
-{
-box-sizing:border-box;
-}
+{box-sizing:border-box;}
 
 body{
 font-family:-apple-system;
@@ -52,28 +50,20 @@ text-align:center;
 margin:0;
 }
 
-.page{
-padding:16px;
-}
+.page{padding:16px;}
 
-label{
-display:block;
-margin-bottom:6px;
-}
+label{display:block;margin-bottom:6px;}
 
 textarea{
 width:100%;
-height:180px;
+height:170px;
 font-size:16px;
 padding:10px;
 margin-bottom:12px;
-
 background:var(--card);
 color:var(--text);
-
 border:1px solid var(--border);
 border-radius:8px;
-
 overflow:auto;
 resize:vertical;
 }
@@ -83,10 +73,8 @@ width:100%;
 padding:12px;
 font-size:16px;
 margin-bottom:12px;
-
 background:var(--card);
 color:var(--text);
-
 border:1px solid var(--border);
 border-radius:8px;
 }
@@ -101,28 +89,17 @@ border-radius:10px;
 color:white;
 }
 
-.generate{
-background:var(--btn-green);
-}
-
-.check{
-background:var(--btn-blue);
-}
-
-.reveal{
-background:var(--btn-orange);
-}
+.generate{background:var(--btn-green);}
+.check{background:var(--btn-blue);}
+.reveal{background:var(--btn-orange);}
 
 .container{
 display:flex;
 gap:12px;
-width:100%;
 }
 
 .tablebox{
 flex:1;
-display:flex;
-flex-direction:column;
 }
 
 table{
@@ -207,13 +184,16 @@ Reveal Answer
 <div class="result" id="result"></div>
 
 <table>
+
 <thead>
 <tr>
 <th>A.id</th>
 <th>B.id</th>
 </tr>
 </thead>
+
 <tbody id="rows"></tbody>
+
 </table>
 
 </div>
@@ -223,7 +203,7 @@ Reveal Answer
 let answer=[]
 
 function displayValue(v){
-return v===null ? "NULL" : v
+return v===null?"NULL":v
 }
 
 function randomBetween(min,max){
@@ -246,20 +226,19 @@ return String.fromCharCode(65 + Math.floor(Math.random()*max))
 function randomList(size,max,includeNull,type){
 
 let arr=[]
-
 for(let i=0;i<size;i++){
-arr.push(generateValue(type,max,includeNull))
+arr.push(generateValue(type,max,includeNull,type))
 }
-
 return arr
+
 }
 
 function generate(){
 
-const diff=document.getElementById("difficulty").value
+let diff=document.getElementById("difficulty").value
 
-let sizeA=4
-let sizeB=4
+let sizeA
+let sizeB
 let max=5
 let includeNull=false
 
@@ -280,10 +259,10 @@ sizeB=randomBetween(9,12)
 includeNull=true
 }
 
-const type=Math.random()<0.5?"number":"alpha"
+let type=Math.random()<0.5?"number":"alpha"
 
-const A=randomList(sizeA,max,includeNull,type)
-const B=randomList(sizeB,max,includeNull,type)
+let A=randomList(sizeA,max,includeNull,type)
+let B=randomList(sizeB,max,includeNull,type)
 
 document.getElementById("tableA").value=A.map(displayValue).join("\n")
 document.getElementById("tableB").value=B.map(displayValue).join("\n")
@@ -291,15 +270,13 @@ document.getElementById("tableB").value=B.map(displayValue).join("\n")
 document.getElementById("rows").innerHTML=""
 document.getElementById("result").innerText=""
 
-answer=[]
-
 }
 
 function parse(x){
 
 return x.split(/\n/).map(v=>{
 v=v.trim()
-if(v.toLowerCase()==="null") return null
+if(v.toLowerCase()==="null")return null
 return v
 })
 
@@ -310,7 +287,6 @@ function join(A,B,type){
 let rows=[]
 
 if(type==="inner"){
-
 A.forEach(a=>{
 B.forEach(b=>{
 if(a!==null && b!==null && a===b){
@@ -318,59 +294,38 @@ rows.push([a,b])
 }
 })
 })
-
 }
 
 if(type==="left"){
-
 A.forEach(a=>{
-
 let matched=false
-
 B.forEach(b=>{
 if(a!==null && b!==null && a===b){
 rows.push([a,b])
 matched=true
 }
 })
-
-if(!matched){
-rows.push([a,null])
-}
-
+if(!matched)rows.push([a,null])
 })
-
 }
 
 if(type==="right"){
-
 B.forEach(b=>{
-
 let matched=false
-
 A.forEach(a=>{
 if(a!==null && b!==null && a===b){
 rows.push([a,b])
 matched=true
 }
 })
-
-if(!matched){
-rows.push([null,b])
-}
-
+if(!matched)rows.push([null,b])
 })
-
 }
 
 if(type==="full"){
-
 let matched=new Array(B.length).fill(false)
-
 A.forEach(a=>{
-
 let m=false
-
 B.forEach((b,i)=>{
 if(a!==null && b!==null && a===b){
 rows.push([a,b])
@@ -378,29 +333,19 @@ matched[i]=true
 m=true
 }
 })
-
-if(!m){
-rows.push([a,null])
-}
-
+if(!m)rows.push([a,null])
 })
-
 B.forEach((b,i)=>{
-if(!matched[i]){
-rows.push([null,b])
-}
+if(!matched[i])rows.push([null,b])
 })
-
 }
 
 if(type==="cartesian"){
-
 A.forEach(a=>{
 B.forEach(b=>{
 rows.push([a,b])
 })
 })
-
 }
 
 if(type==="union"){
@@ -417,14 +362,13 @@ return rows
 
 function check(){
 
-const A=parse(document.getElementById("tableA").value)
-const B=parse(document.getElementById("tableB").value)
-
-const type=document.getElementById("joinType").value
+let A=parse(document.getElementById("tableA").value)
+let B=parse(document.getElementById("tableB").value)
+let type=document.getElementById("joinType").value
 
 answer=join(A,B,type)
 
-const guess=parseInt(document.getElementById("guess").value)
+let guess=parseInt(document.getElementById("guess").value)
 
 if(guess===answer.length){
 document.getElementById("result").innerText="✅ Correct"
@@ -436,24 +380,18 @@ document.getElementById("result").innerText="❌ Incorrect"
 
 function reveal(){
 
-const tbody=document.getElementById("rows")
+let tbody=document.getElementById("rows")
 tbody.innerHTML=""
 
 answer.forEach(r=>{
-
 let tr=document.createElement("tr")
-
 let a=displayValue(r[0])
 let b=displayValue(r[1])
-
 tr.innerHTML="<td>"+a+"</td><td>"+b+"</td>"
-
 tbody.appendChild(tr)
-
 })
 
-document.getElementById("result").innerText =
-"Correct Row Count = " + answer.length
+document.getElementById("result").innerText="Correct Row Count = "+answer.length
 
 }
 
