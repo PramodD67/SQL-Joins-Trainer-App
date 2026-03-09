@@ -16,9 +16,7 @@
 --text:#000;
 --card:#ffffff;
 --border:#cccccc;
-
 --header:#1E3A8A;
-
 --btn-green:#2E7D32;
 --btn-blue:#1565C0;
 --btn-orange:#C66900;
@@ -65,7 +63,7 @@ margin-bottom:6px;
 
 textarea{
 width:100%;
-height:170px;
+height:180px;
 font-size:16px;
 padding:10px;
 margin-bottom:12px;
@@ -98,10 +96,8 @@ width:100%;
 padding:14px;
 font-size:16px;
 margin-top:8px;
-
 border:none;
 border-radius:10px;
-
 color:white;
 }
 
@@ -120,17 +116,19 @@ background:var(--btn-orange);
 .container{
 display:flex;
 gap:12px;
+width:100%;
 }
 
 .tablebox{
 flex:1;
+display:flex;
+flex-direction:column;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
-
 background:var(--card);
 }
 
@@ -209,16 +207,13 @@ Reveal Answer
 <div class="result" id="result"></div>
 
 <table>
-
 <thead>
 <tr>
 <th>A.id</th>
 <th>B.id</th>
 </tr>
 </thead>
-
 <tbody id="rows"></tbody>
-
 </table>
 
 </div>
@@ -261,10 +256,10 @@ return arr
 
 function generate(){
 
-let diff=document.getElementById("difficulty").value
+const diff=document.getElementById("difficulty").value
 
-let sizeA
-let sizeB
+let sizeA=4
+let sizeB=4
 let max=5
 let includeNull=false
 
@@ -285,32 +280,27 @@ sizeB=randomBetween(9,12)
 includeNull=true
 }
 
-let type=Math.random()<0.5 ? "number" : "alpha"
+const type=Math.random()<0.5?"number":"alpha"
 
-let A=randomList(sizeA,max,includeNull,type)
-let B=randomList(sizeB,max,includeNull,type)
+const A=randomList(sizeA,max,includeNull,type)
+const B=randomList(sizeB,max,includeNull,type)
 
-document.getElementById("tableA").value =
-A.map(displayValue).join("\n")
-
-document.getElementById("tableB").value =
-B.map(displayValue).join("\n")
+document.getElementById("tableA").value=A.map(displayValue).join("\n")
+document.getElementById("tableB").value=B.map(displayValue).join("\n")
 
 document.getElementById("rows").innerHTML=""
 document.getElementById("result").innerText=""
+
+answer=[]
 
 }
 
 function parse(x){
 
 return x.split(/\n/).map(v=>{
-
 v=v.trim()
-
 if(v.toLowerCase()==="null") return null
-
 return v
-
 })
 
 }
@@ -414,16 +404,11 @@ rows.push([a,b])
 }
 
 if(type==="union"){
-
-let set=[...new Set([...A,...B])]
-set.forEach(x=>rows.push([x,""]))
-
+[...new Set([...A,...B])].forEach(x=>rows.push([x,""]))
 }
 
 if(type==="unionall"){
-
 [...A,...B].forEach(x=>rows.push([x,""]))
-
 }
 
 return rows
@@ -432,14 +417,14 @@ return rows
 
 function check(){
 
-let A=parse(document.getElementById("tableA").value)
-let B=parse(document.getElementById("tableB").value)
+const A=parse(document.getElementById("tableA").value)
+const B=parse(document.getElementById("tableB").value)
 
-let type=document.getElementById("joinType").value
+const type=document.getElementById("joinType").value
 
 answer=join(A,B,type)
 
-let guess=parseInt(document.getElementById("guess").value)
+const guess=parseInt(document.getElementById("guess").value)
 
 if(guess===answer.length){
 document.getElementById("result").innerText="✅ Correct"
@@ -451,8 +436,7 @@ document.getElementById("result").innerText="❌ Incorrect"
 
 function reveal(){
 
-let tbody=document.getElementById("rows")
-
+const tbody=document.getElementById("rows")
 tbody.innerHTML=""
 
 answer.forEach(r=>{
