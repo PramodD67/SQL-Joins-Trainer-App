@@ -348,3 +348,23 @@ padding:16px;
 }
 
 }
+
+.explanation{
+
+margin-top:18px;
+
+padding:18px;
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+line-height:1.7;
+
+box-shadow:var(--shadow);
+
+font-size:15px;
+
+}
