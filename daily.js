@@ -92,8 +92,13 @@ A.map(displayValue).join("\n")
 document.getElementById("tableB").value =
 B.map(displayValue).join("\n")
 
-document.getElementById("joinType").value =
-joinType
+document.getElementById("questionText").innerHTML =
+
+"What will be the row count for the <b>" +
+
+joinType.toUpperCase() +
+
+"</b> between the tables below?"
 
 }
 
