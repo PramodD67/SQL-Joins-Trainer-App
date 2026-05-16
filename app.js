@@ -2,23 +2,49 @@
 
 const appState = {
 
-    answer: [],
+answer: [],
 
-    interviewMode: false,
+interviewMode: false,
 
-    currentQuestion: 1,
+currentQuestion: 1,
 
-    totalQuestions: 10,
+totalQuestions: 10,
 
-    score: 0,
+score: 0,
 
-    timer: 60,
+timer: 60,
 
-    interval: null
+interval: null
 
 }
 
 let answer=[]
+
+document
+.getElementById("startInterview")
+.addEventListener("click", startInterview)
+
+function startInterview(){
+
+
+appState.interviewMode = true
+
+appState.currentQuestion = 1
+
+appState.score = 0
+
+document
+.getElementById("interviewPanel")
+.style.display = "block"
+
+generate()
+
+startTimer()
+
+}
+
+function displayValue(v){
+
 
 function displayValue(v){
 return v===null ? "NULL" : v
