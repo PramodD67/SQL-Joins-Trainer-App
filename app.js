@@ -358,12 +358,12 @@ document.getElementById("explanation").innerText =
 text
 
 }
-document.getElementById("explanation")
-.innerHTML =
-`<b>Explanation</b><br><br>
-Join Type: ${type}<br>
-Table A Rows: ${window.currentA.length}<br>
-Table B Rows: ${window.currentB.length}<br>
-Output Rows: ${answer.length}<br><br>
-Duplicates and NULL values affect output count significantly.`
+// document.getElementById("explanation")
+// .innerHTML =
+// `<b>Explanation</b><br><br>
+// Join Type: ${type}<br>
+// Table A Rows: ${window.currentA.length}<br>
+// Table B Rows: ${window.currentB.length}<br>
+// Output Rows: ${answer.length}<br><br>
+// Duplicates and NULL values affect output count significantly.`
 }
