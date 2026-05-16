@@ -2,13 +2,16 @@
 <html>
 
 <head>
-<link rel="stylesheet" href="style.css">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 
 <title>SQL Joins PlayGround</title>
 
+<link rel="stylesheet" href="style.css">
+
+</head>
 
 <body>
 
@@ -28,26 +31,26 @@
 Generate Question
 </button>
 
-<button class="generate" id="startInterview">
+<button class="interview" id="startInterview">
 Start Interview Mode
 </button>
 
-<div id="interviewPanel" style="display:none;">
+<div id="interviewPanel" class="panel hidden">
 
-    <h3 id="questionNumber">
-        Question 1 / 10
-    </h3>
+<div class="panel-item" id="questionNumber">
+Question 1 / 10
+</div>
 
-    <h3 id="timer">
-        60s
-    </h3>
+<div class="panel-item" id="timer">
+60s
+</div>
 
-    <h3 id="score">
-        Score: 0
-    </h3>
+<div class="panel-item" id="score">
+Score: 0
+</div>
 
 </div>
-  
+
 <div class="container">
 
 <div class="tablebox">
@@ -92,7 +95,13 @@ Check Answer
 Reveal Answer
 </button>
 
+<button class="share" onclick="shareResult()">
+Share Result
+</button>
+
 <div class="result" id="result"></div>
+
+<div class="explanation" id="explanation"></div>
 
 <table>
 
@@ -110,7 +119,7 @@ Reveal Answer
 </div>
 
 <script src="app.js"></script>
-  
+
 </body>
 
 </html>
