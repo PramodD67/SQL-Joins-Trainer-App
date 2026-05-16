@@ -295,20 +295,38 @@ parseInt(
 document.getElementById("guess").value
 )
 
-if(guess===currentAnswer.length){
+// if(guess===currentAnswer.length){
+
+// score++
+
+// document.getElementById("result").innerText =
+// "✅ Correct"
+
+// }else{
+
+// document.getElementById("result").innerText =
+// "❌ Wrong"
+
+// }
+
+  if(guess===currentAnswer.length){
 
 score++
 
-document.getElementById("result").innerText =
-"✅ Correct"
-
+showToast(
+"✅ Correct Answer",
+"success"
+)
+    
 }else{
 
-document.getElementById("result").innerText =
-"❌ Wrong"
+showToast(
+"❌ Wrong Answer",
+"error"
+)
 
 }
-
+  
 document.getElementById("score").innerText =
 "Score: " + score
 
@@ -321,5 +339,24 @@ setTimeout(()=>{
 nextQuestion()
 
 },1200)
+
+}
+
+
+function showToast(message,type){
+
+let toast =
+document.getElementById("toast")
+
+toast.innerText = message
+
+toast.className =
+"toast show " + type
+
+setTimeout(()=>{
+
+toast.className = "toast"
+
+},2200)
 
 }
