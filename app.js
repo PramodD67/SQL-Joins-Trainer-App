@@ -294,11 +294,70 @@ let b=displayValue(r[1])
 tr.innerHTML="<td>"+a+"</td><td>"+b+"</td>"
 tbody.appendChild(tr)
 })
+
+  
 let type =
 document.getElementById("joinType").value
-document.getElementById("result")
-.innerText =
+document.getElementById("result").innerText =
 "Correct Row Count = " + answer.length
+showExplanation(type,A,B)
+function showExplanation(type,A,B){
+
+let text = ""
+
+if(type==="inner"){
+
+text =
+"INNER JOIN returns only matching rows between Table A and Table B. NULL values do not match with anything."
+
+}
+
+if(type==="left"){
+
+text =
+"LEFT JOIN returns all rows from Table A plus matching rows from Table B. Non-matching rows from B become NULL."
+
+}
+
+if(type==="right"){
+
+text =
+"RIGHT JOIN returns all rows from Table B plus matching rows from Table A. Non-matching rows from A become NULL."
+
+}
+
+if(type==="full"){
+
+text =
+"FULL JOIN returns all matching and non-matching rows from both tables."
+
+}
+
+if(type==="cartesian"){
+
+text =
+"CARTESIAN JOIN multiplies every row from Table A with every row from Table B."
+
+}
+
+if(type==="union"){
+
+text =
+"UNION combines rows from both tables and removes duplicates."
+
+}
+
+if(type==="unionall"){
+
+text =
+"UNION ALL combines rows from both tables including duplicates."
+
+}
+
+document.getElementById("explanation").innerText =
+text
+
+}
 document.getElementById("explanation")
 .innerHTML =
 `<b>Explanation</b><br><br>
