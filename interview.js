@@ -211,12 +211,13 @@ return rows
 
 }
 
+
 function startInterview(){
 
-  document
+document
 .getElementById("startBtn")
 .style.display = "none"
-  
+
 currentQuestion = 1
 score = 0
 
@@ -232,7 +233,7 @@ nextQuestion()
 
 function nextQuestion(){
 
-if(currentQuestion>totalQuestions){
+if(currentQuestion >= totalQuestions + 1){
 
 clearInterval(timer)
 
