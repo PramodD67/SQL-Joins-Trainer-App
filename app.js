@@ -20,13 +20,9 @@ let answer=[]
 
 // Interview Mode Button
 
-window.onload = function(){
-
 document
 .getElementById("startInterview")
 .addEventListener("click", startInterview)
-
-}
 
 function startInterview(){
 
@@ -279,10 +275,8 @@ document.getElementById("explanation")
 function parse(x){
 
 return x.split(/\n/).map(v=>{
-  
-v=v.trim()
 
-if(v==="") return null
+v=v.trim()
 
 if(v.toLowerCase()==="null") return null
 
@@ -480,8 +474,4 @@ document.getElementById("explanation")
 `<b>Explanation</b><br><br>
 Join Type: ${type}<br>
 Table A Rows: ${window.currentA.length}<br>
-Table B Rows: ${window.currentB.length}<br>
-Output Rows: ${answer.length}<br><br>
-Duplicates and NULL values affect output count significantly.`
-
-}
+Table B Rows: ${window.currentB.le
