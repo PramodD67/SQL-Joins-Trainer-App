@@ -420,36 +420,38 @@ background:#16a34a;
 background:#dc2626;
 }
 
-.daily-banner{
+.daily-header{
 
-background:linear-gradient(135deg,#f59e0b,#ea580c);
+display:flex;
 
-color:white;
+align-items:center;
 
-padding:14px;
+justify-content:space-between;
 
-border-radius:16px;
+margin-bottom:20px;
 
-font-weight:700;
-
-text-align:center;
-
-margin-bottom:14px;
-
-box-shadow:var(--shadow);
+padding:0 4px;
 
 }
 
-.challenge-date{
+.daily-title{
 
-text-align:center;
+font-size:22px;
 
-font-size:15px;
+font-weight:800;
+
+color:var(--text);
+
+}
+
+.daily-date{
+
+font-size:14px;
 
 font-weight:600;
 
-margin-bottom:18px;
+opacity:0.7;
 
-opacity:0.8;
+color:var(--text);
 
 }
