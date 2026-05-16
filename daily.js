@@ -1,4 +1,5 @@
 let answer = []
+let currentJoinType = ""
 
 function displayValue(v){
 return v===null ? "NULL" : v
@@ -83,7 +84,8 @@ let joinType =
 joins[
 seededValue(seed+99,joins.length)-1
 ]
-
+currentJoinType = joinType
+  
 answer = join(A,B,joinType)
 
 document.getElementById("tableA").value =
@@ -228,27 +230,27 @@ showToast(
 
 function revealDailyAnswer(){
 
-let tbody=document.getElementById("rows")
+let tbody =
+document.getElementById("rows")
 
-tbody.innerHTML=""
+tbody.innerHTML = ""
 
 answer.forEach(r=>{
 
-let tr=document.createElement("tr")
+let tr =
+document.createElement("tr")
 
-let a=displayValue(r[0])
-let b=displayValue(r[1])
+let a = displayValue(r[0])
+let b = displayValue(r[1])
 
-tr.innerHTML="<td>"+a+"</td><td>"+b+"</td>"
+tr.innerHTML =
+"<td>"+a+"</td><td>"+b+"</td>"
 
 tbody.appendChild(tr)
 
 })
 
-let type =
-document.getElementById("joinType").value
-
-showExplanation(type)
+showExplanation(currentJoinType)
 
 document.getElementById("result").innerText =
 "Correct Row Count = " + answer.length
