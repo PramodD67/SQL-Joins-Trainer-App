@@ -2,11 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1,
+maximum-scale=1,
+user-scalable=no,
+viewport-fit=cover">
 
 <title>Interview Mode</title>
+
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -33,10 +37,6 @@ Score: 0
 </div>
 </div>
 
-<button class="interview" onclick="startInterview()">
-Start Interview
-</button>
-
 <div class="container">
 
 <div class="tablebox">
@@ -52,7 +52,6 @@ Start Interview
 </div>
 
 <label>Join Type</label>
-
 <select id="joinType">
 <option value="inner">Inner Join</option>
 <option value="left">Left Join</option>
@@ -66,7 +65,7 @@ Start Interview
 <label>Your Guess</label>
 <input type="number" id="guess">
 
-<button class="check" onclick="checkAnswer()">
+<button class="check" onclick="check()">
 Submit Answer
 </button>
 
