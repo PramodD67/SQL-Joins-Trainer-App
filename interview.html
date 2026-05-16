@@ -42,7 +42,10 @@ Score: 0
 
 </div>
 
-<button class="interview" onclick="startInterview()">
+<button
+class="interview"
+id="startBtn"
+onclick="startInterview()">
 Start Interview
 </button>
 
@@ -68,7 +71,7 @@ Start Interview
 
 <label>Join Type</label>
 
-<select id="joinType">
+<select id="joinType" disabled>
 
 <option value="inner">Inner Join</option>
 <option value="left">Left Join</option>
