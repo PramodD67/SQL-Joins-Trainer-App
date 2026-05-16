@@ -285,7 +285,7 @@ showToast(
 "success"
 )
 document.getElementById("result").innerText =
-"Correct"
+"✅ Correct Answer"
 }else{
 
 showToast(
@@ -293,7 +293,7 @@ showToast(
 "error"
 )
 document.getElementById("result").innerText =
-"Incorrect"
+"❌ Wrong Answer"
 }
 if(appState.interviewMode){
 setTimeout(()=>{
