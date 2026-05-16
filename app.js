@@ -174,7 +174,7 @@ document.getElementById("tableB").value =
 B.map(displayValue).join("\n")
 document.getElementById("rows").innerHTML=""
 document.getElementById("result").innerText=""
-document.getElementById("explanation").innerText = ""
+document.getElementById("explanation").innerHTML ="<b>Explanation</b><br><br>" + text
 }
 function parse(x){
 return x.split(/\n/).map(v=>{
