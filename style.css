@@ -455,3 +455,31 @@ opacity:0.7;
 color:var(--text);
 
 }
+
+.question-box{
+
+margin-bottom:20px;
+
+padding:18px;
+
+background:linear-gradient(
+135deg,
+rgba(59,130,246,0.15),
+rgba(139,92,246,0.15)
+);
+
+border:1px solid rgba(255,255,255,0.08);
+
+border-radius:20px;
+
+font-size:18px;
+
+font-weight:700;
+
+line-height:1.5;
+
+color:var(--text);
+
+box-shadow:var(--shadow);
+
+}
