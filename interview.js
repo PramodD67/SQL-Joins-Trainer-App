@@ -1,6 +1,3 @@
-window.onload = function(){
-startInterview()
-}
 let currentQuestion = 1
 let totalQuestions = 10
 
