@@ -174,8 +174,7 @@ document.getElementById("tableB").value =
 B.map(displayValue).join("\n")
 document.getElementById("rows").innerHTML=""
 document.getElementById("result").innerText=""
-document.getElementById("explanation")
-.innerText = ""
+document.getElementById("explanation").innerText = ""
 }
 function parse(x){
 return x.split(/\n/).map(v=>{
@@ -284,45 +283,59 @@ nextQuestion()
 },1000)
 }
 }
+
 function reveal(){
-let tbody=document.getElementById("rows")
-tbody.innerHTML=""
+
+let tbody = document.getElementById("rows")
+
+tbody.innerHTML = ""
+
 answer.forEach(r=>{
-let tr=document.createElement("tr")
-let a=displayValue(r[0])
-let b=displayValue(r[1])
-tr.innerHTML="<td>"+a+"</td><td>"+b+"</td>"
+
+let tr = document.createElement("tr")
+
+let a = displayValue(r[0])
+let b = displayValue(r[1])
+
+tr.innerHTML =
+"<td>"+a+"</td><td>"+b+"</td>"
+
 tbody.appendChild(tr)
+
 })
 
-  
 let type =
 document.getElementById("joinType").value
+
 document.getElementById("result").innerText =
 "Correct Row Count = " + answer.length
-showExplanation(type,A,B)
-function showExplanation(type,A,B){
+
+showExplanation(type)
+
+}
+
+function showExplanation(type){
 
 let text = ""
 
 if(type==="inner"){
 
 text =
-"INNER JOIN returns only matching rows between Table A and Table B. NULL values do not match with anything."
+"INNER JOIN returns only matching rows between Table A and Table B. NULL values do not match."
 
 }
 
 if(type==="left"){
 
 text =
-"LEFT JOIN returns all rows from Table A plus matching rows from Table B. Non-matching rows from B become NULL."
+"LEFT JOIN returns all rows from Table A and matching rows from Table B. Non-matching rows become NULL."
 
 }
 
 if(type==="right"){
 
 text =
-"RIGHT JOIN returns all rows from Table B plus matching rows from Table A. Non-matching rows from A become NULL."
+"RIGHT JOIN returns all rows from Table B and matching rows from Table A. Non-matching rows become NULL."
 
 }
 
@@ -336,34 +349,25 @@ text =
 if(type==="cartesian"){
 
 text =
-"CARTESIAN JOIN multiplies every row from Table A with every row from Table B."
+"CARTESIAN JOIN creates every possible combination of rows."
 
 }
 
 if(type==="union"){
 
 text =
-"UNION combines rows from both tables and removes duplicates."
+"UNION combines rows and removes duplicates."
 
 }
 
 if(type==="unionall"){
 
 text =
-"UNION ALL combines rows from both tables including duplicates."
+"UNION ALL combines rows including duplicates."
 
 }
 
 document.getElementById("explanation").innerText =
 text
 
-}
-// document.getElementById("explanation")
-// .innerHTML =
-// `<b>Explanation</b><br><br>
-// Join Type: ${type}<br>
-// Table A Rows: ${window.currentA.length}<br>
-// Table B Rows: ${window.currentB.length}<br>
-// Output Rows: ${answer.length}<br><br>
-// Duplicates and NULL values affect output count significantly.`
 }
