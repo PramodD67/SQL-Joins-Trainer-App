@@ -20,9 +20,13 @@ let answer=[]
 
 // Interview Mode Button
 
+window.onload = function(){
+
 document
 .getElementById("startInterview")
 .addEventListener("click", startInterview)
+
+}
 
 function startInterview(){
 
