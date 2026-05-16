@@ -270,3 +270,44 @@ button{
 font-size:17px;
 }
 }
+------------------------------------------------------------
+
+.home-body{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.app-logo{
+width:90px;
+height:90px;
+margin:0 auto 20px;
+border-radius:28px;
+background:linear-gradient(135deg,#2563eb,#06b6d4);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+font-weight:700;
+color:white;
+box-shadow:0 20px 40px rgba(0,0,0,0.25);
+}
+
+.topbar{
+display:flex;
+align-items:center;
+gap:14px;
+padding:20px;
+padding-top:calc(20px + env(safe-area-inset-top));
+}
+
+.back-btn{
+text-decoration:none;
+font-size:24px;
+color:var(--text);
+background:var(--card);
+width:42px;
+height:42px;
+border-radius:14px;
+display:
