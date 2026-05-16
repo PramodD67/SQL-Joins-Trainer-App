@@ -1,5 +1,23 @@
 <script>
 
+const appState = {
+
+    answer: [],
+
+    interviewMode: false,
+
+    currentQuestion: 1,
+
+    totalQuestions: 10,
+
+    score: 0,
+
+    timer: 60,
+
+    interval: null
+
+}
+
 let answer=[]
 
 function displayValue(v){
