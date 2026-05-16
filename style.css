@@ -351,7 +351,7 @@ padding:16px;
 
 .explanation{
 
-margin-top:18px;
+margin-top:8px;
 
 padding:18px;
 
@@ -361,10 +361,10 @@ border:1px solid var(--border);
 
 border-radius:18px;
 
-line-height:1.7;
+line-height:1;
 
 box-shadow:var(--shadow);
 
-font-size:15px;
+font-size:18px;
 
 }
