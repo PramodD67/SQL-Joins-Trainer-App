@@ -213,6 +213,10 @@ return rows
 
 function startInterview(){
 
+  document
+.getElementById("startBtn")
+.style.display = "none"
+  
 currentQuestion = 1
 score = 0
 
