@@ -1,16 +1,15 @@
-<style>
-
 :root{
 --bg:#f4f4f4;
 --text:#000;
 --card:#ffffff;
 --border:#cccccc;
-
---header:#f4f4f4; 
+--header:#f4f4f4;
 
 --btn-green:#2E7D32;
 --btn-blue:#1565C0;
 --btn-orange:#C66900;
+--btn-purple:#6A1B9A;
+--btn-dark:#37474F;
 }
 
 @media (prefers-color-scheme: dark){
@@ -59,13 +58,10 @@ height:160px;
 font-size:16px;
 padding:10px;
 margin-bottom:12px;
-
 background:var(--card);
 color:var(--text);
-
 border:1px solid var(--border);
 border-radius:8px;
-
 overflow:auto;
 resize:vertical;
 }
@@ -75,10 +71,8 @@ width:100%;
 padding:12px;
 font-size:16px;
 margin-bottom:12px;
-
 background:var(--card);
 color:var(--text);
-
 border:1px solid var(--border);
 border-radius:8px;
 }
@@ -88,15 +82,17 @@ width:100%;
 padding:14px;
 font-size:16px;
 margin-top:8px;
-
 border:none;
 border-radius:10px;
-
 color:white;
 }
 
 .generate{
 background:var(--btn-green);
+}
+
+.interview{
+background:var(--btn-purple);
 }
 
 .check{
@@ -105,6 +101,10 @@ background:var(--btn-blue);
 
 .reveal{
 background:var(--btn-orange);
+}
+
+.share{
+background:var(--btn-dark);
 }
 
 .container{
@@ -120,7 +120,6 @@ table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
-
 background:var(--card);
 }
 
@@ -136,6 +135,33 @@ font-weight:bold;
 margin-top:16px;
 }
 
-</style>
+.panel{
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-top:12px;
+margin-bottom:12px;
+}
 
-</head>
+.panel-item{
+flex:1;
+background:var(--card);
+padding:12px;
+border-radius:8px;
+text-align:center;
+border:1px solid var(--border);
+font-weight:bold;
+}
+
+.hidden{
+display:none;
+}
+
+.explanation{
+margin-top:16px;
+padding:14px;
+border-radius:8px;
+background:var(--card);
+border:1px solid var(--border);
+line-height:1.6;
+}
