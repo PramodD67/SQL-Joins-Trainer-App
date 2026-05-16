@@ -266,16 +266,34 @@ let B=parse(document.getElementById("tableB").value)
 let type=document.getElementById("joinType").value
 answer=join(A,B,type)
 let guess=parseInt(document.getElementById("guess").value)
+// if(guess===answer.length){
+// document.getElementById("result")
+// .innerText="✅ Correct"
+// if(appState.interviewMode){
+// appState.score++
+// updateInterviewPanel()
+// }
+// }else{
+// document.getElementById("result")
+// .innerText="❌ Incorrect"
+// }
+
 if(guess===answer.length){
-document.getElementById("result")
-.innerText="✅ Correct"
-if(appState.interviewMode){
-appState.score++
-updateInterviewPanel()
-}
+
+showToast(
+"✅ Correct Answer",
+"success"
+)
+document.getElementById("result").innerText =
+"Correct"
 }else{
-document.getElementById("result")
-.innerText="❌ Incorrect"
+
+showToast(
+"❌ Wrong Answer",
+"error"
+)
+document.getElementById("result").innerText =
+"Incorrect"
 }
 if(appState.interviewMode){
 setTimeout(()=>{
@@ -369,5 +387,23 @@ text =
 
 document.getElementById("explanation").innerText =
 text
+
+}
+
+function showToast(message,type){
+
+let toast =
+document.getElementById("toast")
+
+toast.innerText = message
+
+toast.className =
+"toast show " + type
+
+setTimeout(()=>{
+
+toast.className = "toast"
+
+},2200)
 
 }
