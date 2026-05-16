@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1,
+maximum-scale=1,
+user-scalable=no,
+viewport-fit=cover">
+
+<title>Interview Mode</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="topbar">
+<a href="index.html" class="back-btn">←</a>
+<h2>Interview Mode</h2>
+</div>
+
+<div class="page">
+
+<div class="panel">
+<div class="panel-item" id="questionNumber">
+Question 1 / 10
+</div>
+
+<div class="panel-item" id="timer">
+60s
+</div>
+
+<div class="panel-item" id="score">
+Score: 0
+</div>
+</div>
+
+<div class="container">
+
+<div class="tablebox">
+<h3>Table A</h3>
+<textarea id="tableA"></textarea>
+</div>
+
+<div class="tablebox">
+<h3>Table B</h3>
+<textarea id="tableB"></textarea>
+</div>
+
+</div>
+
+<label>Join Type</label>
+<select id="joinType">
+<option value="inner">Inner Join</option>
+<option value="left">Left Join</option>
+<option value="right">Right Join</option>
+<option value="full">Full Join</option>
+<option value="cartesian">Cartesian Join</option>
+<option value="union">Union</option>
+<option value="unionall">Union All</option>
+</select>
+
+<label>Your Guess</label>
+<input type="number" id="guess">
+
+<button class="check" onclick="check()">
+Submit Answer
+</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script src="interview.js"></script>
+
+</body>
+</html>
