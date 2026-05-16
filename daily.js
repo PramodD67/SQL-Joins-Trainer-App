@@ -98,7 +98,7 @@ document.getElementById("questionText").innerHTML =
 
 joinType.toUpperCase() +
 
-"</b> between the tables below?"
+"</b> JOIN between the tables below?"
 
 }
 
