@@ -300,15 +300,22 @@ box-shadow:var(--shadow);
 }
 
 .result{
-margin-top:18px;
-font-size:22px;
+
+margin-top:14px;
+
+margin-bottom:8px;
+
+font-size:20px;
+
 font-weight:700;
+
 text-align:center;
+
 }
 
 table{
 width:100%;
-margin-top:24px;
+margin-top:16px;
 border-collapse:collapse;
 background:var(--card);
 box-shadow:var(--shadow);
@@ -353,18 +360,22 @@ padding:16px;
 
 margin-top:8px;
 
-padding:18px;
+padding:14px 16px;
 
 background:var(--card);
 
 border:1px solid var(--border);
 
-border-radius:18px;
+border-radius:16px;
 
-line-height:1;
+line-height:1.6;
 
 box-shadow:var(--shadow);
 
-font-size:18px;
+font-size:14px;
+
+text-align:left;
+
+color:var(--text);
 
 }
