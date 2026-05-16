@@ -1,5 +1,3 @@
-<script>
-
 const appState = {
 
 answer: [],
@@ -20,22 +18,23 @@ interval: null
 
 let answer=[]
 
+// Interview Mode Button
+
 document
 .getElementById("startInterview")
 .addEventListener("click", startInterview)
 
 function startInterview(){
 
-
 appState.interviewMode = true
-
 appState.currentQuestion = 1
-
 appState.score = 0
+
+updateInterviewPanel()
 
 document
 .getElementById("interviewPanel")
-.style.display = "block"
+.classList.remove("hidden")
 
 generate()
 
@@ -43,8 +42,127 @@ startTimer()
 
 }
 
-function displayValue(v){
+function updateInterviewPanel(){
 
+document
+.getElementById("questionNumber")
+.innerText =
+"Question " +
+appState.currentQuestion +
+" / " +
+appState.totalQuestions
+
+
+document
+.getElementById("score")
+.innerText =
+"Score: " + appState.score
+
+}
+
+function startTimer(){
+
+clearInterval(appState.interval)
+
+appState.timer = 60
+
+updateTimer()
+
+appState.interval = setInterval(()=>{
+
+appState.timer--
+
+updateTimer()
+
+if(appState.timer <= 0){
+nextQuestion()
+}
+
+},1000)
+
+}
+
+function updateTimer(){
+
+document
+.getElementById("timer")
+.innerText = appState.timer + "s"
+
+}
+
+function nextQuestion(){
+
+clearInterval(appState.interval)
+
+appState.currentQuestion++
+
+if(appState.currentQuestion > appState.totalQuestions){
+finishInterview()
+return
+}
+
+updateInterviewPanel()
+
+generate()
+
+startTimer()
+
+}
+
+function finishInterview(){
+
+clearInterval(appState.interval)
+
+let accuracy = Math.round(
+(appState.score / appState.totalQuestions) * 100
+)
+
+localStorage.setItem(
+"bestScore",
+Math.max(
+appState.score,
+localStorage.getItem("bestScore") || 0
+)
+)
+
+alert(
+"Interview Finished!\n\n" +
+"Score: " +
+appState.score +
+"/" +
+appState.totalQuestions +
+"\n\nAccuracy: " + accuracy + "%"
+)
+
+appState.interviewMode = false
+
+}
+
+function shareResult(){
+
+let text =
+"I scored " +
+appState.score +
+"/" +
+appState.totalQuestions +
+" in SQL Joins Playground 😎"
+
+if(navigator.share){
+
+navigator.share({
+
+title:"SQL Joins Playground",
+text:text
+
+})
+
+}else{
+
+alert(text)
+
+}
+
+}
 
 function displayValue(v){
 return v===null ? "NULL" : v
@@ -102,14 +220,55 @@ let type=Math.random()<0.5 ? "number" : "alpha"
 let A=randomList(sizeA,max,includeNull,type)
 let B=randomList(sizeB,max,includeNull,type)
 
+window.currentA = A
+window.currentB = B
+
+let joinTypes = [
+"inner",
+"left",
+"right",
+"full",
+"cartesian",
+"union",
+"unionall"
+]
+
+let randomJoin =
+joinTypes[
+Math.floor(Math.random()*joinTypes.length)
+]
+
+if(appState.interviewMode){
+
+document
+.getElementById("joinType")
+.value = randomJoin
+
+}
+
+let selectedJoin =
+document.getElementById("joinType").value
+
+answer = join(A,B,selectedJoin)
+
+appState.answer = answer
+
+
 document.getElementById("tableA").value =
 A.map(displayValue).join("\n")
+
 
 document.getElementById("tableB").value =
 B.map(displayValue).join("\n")
 
+
 document.getElementById("rows").innerHTML=""
+
 document.getElementById("result").innerText=""
+
+
+document.getElementById("explanation")
+.innerText = ""
 
 }
 
@@ -256,9 +415,28 @@ answer=join(A,B,type)
 let guess=parseInt(document.getElementById("guess").value)
 
 if(guess===answer.length){
-document.getElementById("result").innerText="✅ Correct"
+
+document.getElementById("result")
+.innerText="✅ Correct"
+
+if(appState.interviewMode){
+appState.score++
+updateInterviewPanel()
+}
+
 }else{
-document.getElementById("result").innerText="❌ Incorrect"
+
+document.getElementById("result")
+.innerText="❌ Incorrect"
+
+}
+
+if(appState.interviewMode){
+
+setTimeout(()=>{
+nextQuestion()
+},1000)
+
 }
 
 }
@@ -282,10 +460,22 @@ tbody.appendChild(tr)
 
 })
 
-document.getElementById("result").innerText =
+let type =
+document.getElementById("joinType").value
+
+
+document.getElementById("result")
+.innerText =
 "Correct Row Count = " + answer.length
 
+
+document.getElementById("explanation")
+.innerHTML =
+`<b>Explanation</b><br><br>
+Join Type: ${type}<br>
+Table A Rows: ${window.currentA.length}<br>
+Table B Rows: ${window.currentB.length}<br>
+Output Rows: ${answer.length}<br><br>
+Duplicates and NULL values affect output count significantly.`
+
 }
-
-</script>
-
