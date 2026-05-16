@@ -169,7 +169,7 @@ background:var(--card);
 color:var(--text);
 border:1px solid var(--border);
 border-radius:18px;
-padding:16px;
+padding:12px;
 font-size:17px;
 outline:none;
 box-shadow:var(--shadow);
@@ -183,7 +183,7 @@ margin-bottom:18px;
 }
 
 textarea{
-height:240px;
+height:180px;
 resize:none;
 overflow:auto;
 white-space:pre;
@@ -193,7 +193,7 @@ line-height:1.6;
 button{
 
 width:100%;
-min-height:58px;
+min-height:50px;
 border:none;
 border-radius:18px;
 font-size:18px;
@@ -254,11 +254,22 @@ margin-bottom:20px;
 flex:1;
 background:var(--card);
 border:1px solid var(--border);
-padding:18px;
-border-radius:20px;
+
+padding:12px;
+
+border-radius:18px;
+
 text-align:center;
-font-size:20px;
+
+font-size:16px;
 font-weight:700;
+
+min-height:72px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
 box-shadow:var(--shadow);
 
 }
