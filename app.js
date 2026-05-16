@@ -275,8 +275,10 @@ document.getElementById("explanation")
 function parse(x){
 
 return x.split(/\n/).map(v=>{
-
+  
 v=v.trim()
+
+if(v==="") return null
 
 if(v.toLowerCase()==="null") return null
 
